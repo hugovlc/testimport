@@ -1,0 +1,80 @@
+<h1>Requests</h1>
+<kendo-grid [data]="view | async" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [sortable]="{mode: 'multiple'}"
+  [pageable]="true" [scrollable]="'none'" (dataStateChange)="dataStateChange($event)" (pageChange)="pageChange($event)" [filterable]="true" [reorderable]="true"
+  [resizable]="true"  [selectable]="true"  [kendoGridSelectBy]="'id'" [selectedKeys]="mySelection">
+
+  <ng-template kendoGridToolbarTemplate>
+    <button kendoGridPDFCommand>
+      <span class='k-icon k-i-file-pdf'></span>Export to PDF</button>
+    <button type="button" kendoGridExcelCommand>
+      <span class="k-icon k-i-file-excel"></span>Export to Excel</button>
+  </ng-template>
+  <kendo-grid-checkbox-column showSelectAll="true"></kendo-grid-checkbox-column>
+  <kendo-grid-column title="Receipt date" field="receiptDate" width="130" filter="date" format="{0:dd/MM/yyyy HH:mm:ss}">
+    <!-- <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.receiptDate | date: 'short'}}
+    </ng-template> -->
+  </kendo-grid-column>
+  <kendo-grid-column field="client.abbreviation" title="Client" width="130"></kendo-grid-column>
+
+  <kendo-grid-column field="requestIdentifier" title="Request ID" width="130"></kendo-grid-column>
+  <kendo-grid-column title="Source Files" width="70">
+    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+      {{dataItem.sourceMaterials.length}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="assignedTo" title="Marked by" width="130"></kendo-grid-column>
+  <kendo-grid-column field="status" title="Status" width="130">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <span class="label">{{dataItem.status.defaultLabel}}</span>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column title="Priority" width="130">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <span class="label label-default status-{{dataItem.priority.defaultLabel.toLowerCase().replace(' ', '-')}}">{{dataItem.priority.defaultLabel}}</span>
+    </ng-template>
+  </kendo-grid-column>
+
+
+  <ng-template kendoGridDetailTemplate let-dataItem>
+    <section>
+      <p>
+        <strong>Request title:</strong> {{dataItem.title}} </p>
+      <p>
+        <strong>Purpose:</strong> {{dataItem.purpose.defaultLabel}} |
+        <strong>Reference documents : </strong>
+        <span class="badge">{{dataItem.referenceSet.references.length}}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>Submission date : </strong>
+        <span>{{dataItem.submissionDate || 'Unknown' | date:'short'}}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>Client’s Contact(s) : </strong>
+        <span>{{dataItem.requestContacts | requestcontactsconcat}}</span>
+      </p>
+      <p>
+        <strong>Current LTS member:</strong> {{dataItem.ltsMember}}</p>
+      <p>
+        <strong>Pre-Processing deadline:</strong> {{dataItem.preprocDeadline | date: 'short'}}</p>
+      <div>
+        <strong>Comment(s) : </strong>
+        <span [innerHTML]="dataItem.clientComment"></span>
+      </div>
+    </section>
+  </ng-template>
+
+  <kendo-grid-pdf fileName="Requests.pdf" [allPages]="false" paperSize="A4" [repeatHeaders]="true" [landscape]="true">
+    <kendo-grid-pdf-margin top="2cm" left="1cm" right="1cm" bottom="2cm"></kendo-grid-pdf-margin>
+    <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
+      <div class="page-template">
+        <div class="header">
+          <div style="float: right">Page {{ pageNum }} of {{ totalPages }}</div>
+          Multi-page grid with automatic page breaking
+        </div>
+        <div class="footer">
+          Page {{ pageNum }} of {{ totalPages }}
+        </div>
+      </div>
+    </ng-template>
+  </kendo-grid-pdf>
+
+  <kendo-grid-excel fileName="Requests.xlsx"></kendo-grid-excel>
+
+</kendo-grid>
