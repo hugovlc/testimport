@@ -12,25 +12,31 @@ import { Order } from '../../model.zza/order';
 export class CustomerDetailComponent implements OnInit {
   private customer: Customer = new Customer();
   private errorMessage: string;
+  private isEditMode: boolean;
 
   constructor(private _router: Router,
     private _route: ActivatedRoute,
     private _zzaRepository: ZzaRepositoryService) { }
 
-    orders: Order[];
+  orders: Order[];
 
   ngOnInit() {
-    let id = this._route.snapshot.params['customerId'];
-    this._zzaRepository.getCustomer(id).then(customer => {
-      this.customer = customer;
-      this._zzaRepository.getCustomerOrderHistory(id).then(orders => this.orders = orders);
-    }, error => {
-      this.errorMessage = error.message;
-    });
+    if (this._route.routeConfig.path != "customer-add") {
+      this.isEditMode = true;
+      let id = this._route.snapshot.params['customerId'];
+      this._zzaRepository.getCustomer(id).then(customer => {
+        this.customer = customer;
+        this._zzaRepository.getCustomerOrderHistory(id).then(orders => this.orders = orders);
+      }, error => {
+        this.errorMessage = error.message;
+      });
+    }else{
+      this.customer = <Customer>this._zzaRepository.createEntity('Customer');
+    }
   }
 
-  onSave(){
-    this._zzaRepository.saveChanges().then(() =>{
+  onSave() {
+    this._zzaRepository.saveChanges().then(() => {
       this._router.navigate(['customer-list']);
     }, error => {
       this.errorMessage = error.message;

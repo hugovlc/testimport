@@ -1,5 +1,5 @@
 <h1>Customers</h1>
-<!-- <div class="row" *ngIf="pageCount">
+<div class="row" *ngIf="pageCount">
   <span>
     <a class="btn btn-default" (click)="pageDown()">&lt;</a>{{currentPage}}/{{pageCount}}
     <a class="btn btn-default" (click)="pageUp()">&gt;</a>
@@ -14,16 +14,17 @@
     <option value="phone">Phone</option>
     <option value="email">Email</option>
   </select>
+  <button class="btn btn-primary" routerLink="/customer-add">Add Customer</button>
 </div>
 
 <div class="row" *ngFor="let customer of customers">
-  <zza-customers-list-item [customer]="customer" [selectedCustomer]="selectedCustomer" (click)="onSelect(customer)"></zza-customers-list-item>
-</div> -->
+  <zza-customers-list-item (deleted)="refresh()" [customer]="customer" [selectedCustomer]="selectedCustomer" (click)="onSelect(customer)"></zza-customers-list-item>
+</div>
 
-<kendo-grid [data]="view | async" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [sortable]="{mode: 'multiple'}" [pageable]="true"
+<!-- <kendo-grid [data]="view | async" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [sortable]="{mode: 'multiple'}" [pageable]="true"
   [scrollable]="'none'" (dataStateChange)="dataStateChange($event)" [filterable]="true">
   <kendo-grid-column field="firstName" width="130"></kendo-grid-column>
   <kendo-grid-column field="lastName" width="200"></kendo-grid-column>
   <kendo-grid-column field="email" [sortable]="false">
   </kendo-grid-column>
-</kendo-grid>
+</kendo-grid> -->

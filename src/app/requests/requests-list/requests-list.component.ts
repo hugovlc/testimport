@@ -1,3 +1,4 @@
+import { Status } from './../../model/status';
 import { CdtRepositoryService } from './../../shared/cdtRepository.service';
 import { Observable } from 'rxjs/Rx';
 import { Component, OnInit, ElementRef } from '@angular/core';
@@ -13,6 +14,7 @@ import { State } from '@progress/kendo-data-query';
 
 export class RequestsListComponent implements OnInit {
   private selectedRequest: Request;
+  private statuses: Status [];
   private searchField: string = 'name';
   private searchInput: string;
   private currentPage: number = 1;
@@ -20,6 +22,7 @@ export class RequestsListComponent implements OnInit {
   private _totalRecords: number;
   private _pageSize: number = 50;
   public mySelection: number[] = [];
+
 
   /* KENDO GRID */
   public view: Observable<GridDataResult>;
@@ -49,5 +52,6 @@ export class RequestsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.statuses = this._cdtRepository.getStatuses();
   }
 }
