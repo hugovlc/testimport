@@ -1,6 +1,6 @@
+import { RequestsModule } from './requests/requests.module';
 import { CanDeactivateGuard } from './shared/can-deactivate-guard';
 import { InitGuard } from './shared/init-guard';
-import { RequestContactsConcat } from './shared/request-contacts-concat.pipe';
 import { CdtRepositoryService } from './shared/cdtRepository.service';
 import { OrderItemsConcatProductsPipe } from './shared/order-items-concat-products.pipe';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,9 +10,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GridModule, PDFModule, ExcelModule } from '@progress/kendo-angular-grid';
-import { DropDownListModule } from '@progress/kendo-angular-dropdowns';
-import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 import { ModalModule } from 'ngx-bootstrap';
 import { BreezeBridgeAngularModule } from 'breeze-bridge-angular';
@@ -24,12 +21,8 @@ import { CustomersListItemComponent } from './customers/customers-list-item/cust
 import { CustomerDetailComponent } from './customers/customer-detail/customer-detail.component';
 import { ZzaRepositoryTelerikService } from './shared/zzarepository-telerik.service';
 import { HttpClientModule } from '@angular/common/http';
-import { RequestsListComponent } from './requests/requests-list/requests-list.component';
 import { OrderComponent } from './orders/order/order.component';
 import { ProductListComponent } from './orders/product-list/product-list.component';
-import { DropDownListFilterComponent } from './shared/grid-filters/dropdownlistfilter.component';
-import { MultiSelectFilterComponent } from './shared/grid-filters/multiselectfilter.component';
-
 
 @NgModule({
   declarations: [
@@ -38,12 +31,8 @@ import { MultiSelectFilterComponent } from './shared/grid-filters/multiselectfil
     CustomersListItemComponent,
     CustomerDetailComponent,
     OrderItemsConcatProductsPipe,
-    RequestContactsConcat,
-    RequestsListComponent,
     OrderComponent,
-    ProductListComponent,
-    DropDownListFilterComponent,
-    MultiSelectFilterComponent
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -51,12 +40,8 @@ import { MultiSelectFilterComponent } from './shared/grid-filters/multiselectfil
     HttpModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    GridModule,
-    DropDownListModule,
-    DropDownsModule,
-    PDFModule,
-    ExcelModule,
     BreezeBridgeAngularModule,
+    RequestsModule,
     ModalModule.forRoot(),
     AppRoutingModule
   ],
