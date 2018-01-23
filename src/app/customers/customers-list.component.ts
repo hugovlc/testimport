@@ -9,11 +9,11 @@ import { ZzaRepositoryService } from '../shared/zzarepository.service';
 })
 
 export class CustomersListComponent implements OnInit {
-  private selectedCustomer: Customer;
-  private searchField: string = 'name';
-  private searchInput: string;
-  private currentPage: number = 1;
-  private pageCount: number;
+  public selectedCustomer: Customer;
+  public searchField: string = 'name';
+  public searchInput: string;
+  public currentPage: number = 1;
+  public pageCount: number;
   private _totalRecords: number;
   private _pageSize: number = 5;
 

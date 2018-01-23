@@ -8,7 +8,7 @@ import { Order } from './order';
 export class Customer extends EntityBase {
 
     /// <code> Place custom code between <code> tags
-    
+
     /// </code>
 
     // Generated code. Do not place code below this line.
@@ -21,6 +21,7 @@ export class Customer extends EntityBase {
     street: string;
     city: string;
     state: string;
+    age: number;
     zip: string;
     orders: Order[];
 }

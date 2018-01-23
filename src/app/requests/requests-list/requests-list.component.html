@@ -1,5 +1,5 @@
 <h1>Requests</h1>
-<kendo-grid [dkendo-grid [data]="view | async" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [sortable]="{mode: 'multiple'}"
+<kendo-grid [data]="view | async" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [sortable]="{mode: 'multiple'}"
   [pageable]="true" [scrollable]="'none'" (dataStateChange)="dataStateChange($event)" (pageChange)="pageChange($event)" [filterable]="true" [reorderable]="true"
   [resizable]="true"  [selectable]="true"  [kendoGridSelectBy]="'id'" [selectedKeys]="mySelection">
 
@@ -15,7 +15,17 @@
       {{dataItem.receiptDate | date: 'short'}}
     </ng-template> -->
   </kendo-grid-column>
-  <kendo-grid-column field="client.abbreviation" title="Client" width="130"></kendo-grid-column>
+  <kendo-grid-column field="client.abbreviation" title="Client" width="130">
+      <ng-template kendoGridFilterCellTemplate let-filter>
+          <my-dropdown-filter
+              [filter]="filter"
+              [data]="clients"
+              textField="abbreviation"
+              valueField="id"
+              entityField="client.id">
+          </my-dropdown-filter>
+      </ng-template>
+  </kendo-grid-column>
 
   <kendo-grid-column field="requestIdentifier" title="Request ID" width="130"></kendo-grid-column>
   <kendo-grid-column title="Source Files" width="70">
@@ -26,12 +36,13 @@
   <kendo-grid-column field="assignedTo" title="Marked by" width="130"></kendo-grid-column>
   <kendo-grid-column field="status" title="Status" width="130">
       <ng-template kendoGridFilterCellTemplate let-filter>
-          <my-dropdown-filter
-              [filter]="filter"
-              [data]="statuses"
-              textField="defaultLabel"
-              valueField="code">
-          </my-dropdown-filter>
+          <my-multiselect-filter
+          [data]="statuses"
+          [(ngModel)]="value"
+          textField="defaultLabel"
+          valueField="code"
+          entityField="status.code"
+        ></my-multiselect-filter>
       </ng-template>
     <ng-template kendoGridCellTemplate let-dataItem>
       <span class="label">{{dataItem.status.defaultLabel}}</span>
@@ -42,7 +53,6 @@
       <span class="label label-default status-{{dataItem.priority.defaultLabel.toLowerCase().replace(' ', '-')}}">{{dataItem.priority.defaultLabel}}</span>
     </ng-template>
   </kendo-grid-column>
-
 
   <ng-template kendoGridDetailTemplate let-dataItem>
     <section>

@@ -10,7 +10,7 @@ import { ModalDirective } from 'ngx-bootstrap';
   styleUrls: ['./customers-list-item.component.scss']
 })
 export class CustomersListItemComponent implements OnInit {
-  private isSelected: boolean;
+  public isSelected: boolean;
 
   constructor(private _zzaRepository: ZzaRepositoryService) { }
 

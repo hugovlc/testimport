@@ -5,16 +5,18 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Request } from './../../model/entity-model';
 import { GridDataResult, DataStateChangeEvent, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { State } from '@progress/kendo-data-query';
+import { Client } from '../../model/client';
 
 @Component({
   selector: 'cdt-requests-list',
   templateUrl: './requests-list.component.html',
-  styleUrls:['./requests-list.component.scss', 'pdf-styles.css']
+  styleUrls: ['./requests-list.component.scss', 'pdf-styles.css']
 })
 
 export class RequestsListComponent implements OnInit {
   private selectedRequest: Request;
-  private statuses: Status [];
+  private statuses: any[];
+  private clients: Client[];
   private searchField: string = 'name';
   private searchInput: string;
   private currentPage: number = 1;
@@ -37,7 +39,7 @@ export class RequestsListComponent implements OnInit {
 
     // Optionally, clear the selection when paging
     this.mySelection = [];
-}
+  }
 
   public dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
@@ -52,6 +54,7 @@ export class RequestsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.statuses = this._cdtRepository.getStatuses();
+    this.statuses = this._cdtRepository.getStatuses().map(s => { return { code: s.code, defaultLabel: s.defaultLabel } });
+    this.clients = this._cdtRepository.getClients();
   }
 }

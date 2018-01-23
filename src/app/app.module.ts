@@ -12,6 +12,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GridModule, PDFModule, ExcelModule } from '@progress/kendo-angular-grid';
 import { DropDownListModule } from '@progress/kendo-angular-dropdowns';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 import { ModalModule } from 'ngx-bootstrap';
 import { BreezeBridgeAngularModule } from 'breeze-bridge-angular';
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RequestsListComponent } from './requests/requests-list/requests-list.component';
 import { OrderComponent } from './orders/order/order.component';
 import { ProductListComponent } from './orders/product-list/product-list.component';
-import { DropDownListFilterComponent } from './shared/dropdownlistfilter.component';
+import { DropDownListFilterComponent } from './shared/grid-filters/dropdownlistfilter.component';
+import { MultiSelectFilterComponent } from './shared/grid-filters/multiselectfilter.component';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { DropDownListFilterComponent } from './shared/dropdownlistfilter.compone
     RequestsListComponent,
     OrderComponent,
     ProductListComponent,
-    DropDownListFilterComponent
+    DropDownListFilterComponent,
+    MultiSelectFilterComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { DropDownListFilterComponent } from './shared/dropdownlistfilter.compone
     BrowserAnimationsModule,
     GridModule,
     DropDownListModule,
+    DropDownsModule,
     PDFModule,
     ExcelModule,
     BreezeBridgeAngularModule,

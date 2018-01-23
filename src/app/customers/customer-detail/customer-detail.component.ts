@@ -10,9 +10,9 @@ import { Order } from '../../model.zza/order';
   styleUrls: ['./customer-detail.component.scss']
 })
 export class CustomerDetailComponent implements OnInit {
-  private customer: Customer = new Customer();
-  private errorMessage: string;
-  private isEditMode: boolean;
+  public customer: Customer = new Customer();
+  public errorMessage: string;
+  public isEditMode: boolean;
 
   constructor(private _router: Router,
     private _route: ActivatedRoute,

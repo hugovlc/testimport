@@ -46,8 +46,8 @@ export class DropDownListFilterComponent extends BaseFilterCellComponent {
             value === null ? // value of the default item
                 this.removeFilter(this.valueField) : // remove the filter
                 this.updateFilter({ // add a filter for the field with the value
-                    field: this.valueField,
-                    entity: this.entityField,
+                    field: this.entityField,
+                  //  entity: this.entityField,
                     operator: 'eq',
                     value: value
                 })

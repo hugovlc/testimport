@@ -9,6 +9,7 @@ import { EntityManager, EntityQuery, Predicate, FilterQueryOp } from 'breeze-cli
 import { RegistrationHelper } from '../model/registration-helper';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
+import { Client } from '../model/client';
 
 
 export abstract class BaseRepositoryService extends BehaviorSubject<GridDataResult> {
@@ -92,5 +93,9 @@ export class CdtRepositoryService extends BaseRepositoryService {
 
   getStatuses(): Status[] {
     return this._em.executeQueryLocally(EntityQuery.from("Statuss")) as Status[];
+  }
+
+  getClients(): Client[] {
+    return this._em.executeQueryLocally(EntityQuery.from("Clients")) as Client[];
   }
 }

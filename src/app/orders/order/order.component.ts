@@ -18,13 +18,13 @@ export class OrderComponent implements OnInit, CanComponentDeactivate {
   private _order: Order = null;
   private _customerId = '';
 
-  private orderItems: OrderItem[] = [];
+  public orderItems: OrderItem[] = [];
 
-  private pizzas: Product[] = [];
-  private salads: Product[] = [];
-  private drinks: Product[] = [];
+  public pizzas: Product[] = [];
+  public salads: Product[] = [];
+  public drinks: Product[] = [];
 
-  private selectedTab: string = "pizzas";
+  public selectedTab: string = "pizzas";
   private _orderedStatusId: number;
 
   ngOnInit() {
