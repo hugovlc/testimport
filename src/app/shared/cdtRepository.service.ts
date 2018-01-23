@@ -1,3 +1,4 @@
+import { AppScreenField } from './../model/app-screen-field';
 import { Status } from './../model/status';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { Request } from './../model/entity-model';
@@ -61,11 +62,19 @@ export abstract class BaseRepositoryService extends BehaviorSubject<GridDataResu
       if (state.filter) {
         var p: Predicate[] = new Array();
 
-        state.filter.filters.forEach((f) => {
-          p.push(Predicate.and(new Predicate(f.field, f.operator, f.value)));
+        state.filter.filters.forEach((filter) => {
+          if (filter.value instanceof Array){
+            var multiselectPredicates: any[] = [];
+            filter.value.forEach((value) => {
+              multiselectPredicates.push(new Predicate(filter.field, filter.operator, value.code));
+            });
+            p.push(Predicate.or(multiselectPredicates));
+          } else{
+            p.push(Predicate.and(new Predicate(filter.field, filter.operator, filter.value)));
+          }
         });
 
-        query = query.where(p);
+        query = query.where(Predicate.and(p));
       }
 
       query = query.expand('status, department, client, sourceMaterials.jobs.priority, sourceMaterials.jobs.service.unit,  sourceMaterials.jobs.jobStatus,  purpose, referenceSet.references, requestContacts.contact');

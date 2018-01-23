@@ -30,7 +30,11 @@ export class RequestsListComponent implements OnInit {
   public view: Observable<GridDataResult>;
   public state: State = {
     skip: 0,
-    take: 50
+    take: 50,
+    // filter: {
+    //   logic: 'and',
+    //   filters: [{ field: 'ProductName', operator: 'contains', value: 'Chef' }]
+    // }
   };
 
   public pageChange(event: PageChangeEvent): void {
