@@ -36,7 +36,7 @@
     "breeze-client": "^1.6.3",
     "core-js": "^2.4.1",
     "jquery": "^3.2.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "ngx-bootstrap": "^2.0.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
